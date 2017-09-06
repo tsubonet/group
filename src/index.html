@@ -1,14 +1,100 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <title>GroupAngularApp</title>
-  <base href="/">
-
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
+<meta charset="utf-8">
+<title>グループ分けツール</title>
+<meta name="description" content="シャッフルランチやレクリエーションなどのランダムなメンバーのグループ分け(チーム分け)にご活用ください。">
+<meta name="keywords" content="グループ分け,チーム分け,シャッフル,ランダム">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="./assets/css/vendor/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="./assets/css/style.css">
 </head>
 <body>
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-40504529-2', 'auto');
+  ga('send', 'pageview');
+  </script>
   <app-root></app-root>
+  <header>
+    <div class="container">
+      <h1 class="text-center"><img src="./assets/img/icons/svg/clipboard.svg" alt="Clipboard"><br>グループ分けツール</h1>
+      <p class="text-lead">シャッフルランチやレクリエーションなどランダムなメンバーのグループ分け(チーム分け)にご活用ください！</p>
+    </div>
+  </header>
+  <main>
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-12 col-sm-6">
+          <div class="tile">
+            <section>
+              <h2><span class="label">STEP 1</span>メンバーを入力する</h2>
+              <p>メンバーの区切りは改行で判断されます。</p>
+              <p>グループの代表者をあらかじめ設定したい場合は、名前の後ろに☆をつけてください。代表者同士が重ならないように振り分けます。</p>
+              <p>例:<br>
+                山田太郎<br>
+                鈴木花子☆<br>
+                佐藤次郎</p>
+              <textarea id="input-persons" placeholder="ここに入力してください&#13;&#10;山田太郎&#13;&#10;鈴木花子☆&#13;&#10;佐藤次郎"></textarea>
+            </section>
+          </div>
+        </div>
+        <div class="col-xs-12 col-sm-6">
+          <div class="tile">
+            <section>
+              <h2><span class="label">STEP 2</span>グループ分けの条件を選ぶ</h2>
+              <div class="radio-wrap">
+                <div>
+                  <p><input type="radio" name="condition" value="0" id="condition-persons" checked><label for="condition-persons" class="radio-label">１グループあたりの人数(+余りは分配)で分ける</label></p>
+                  <select id="select-condition-persons">
+                    <option value="2">2人</option>
+                    <option value="3">3人</option>
+                    <option value="4" selected>4人</option>
+                    <option value="5">5人</option>
+                    <option value="6">6人</option>
+                    <option value="7">7人</option>
+                    <option value="8">8人</option>
+                    <option value="9">9人</option>
+                    <option value="10">10人</option>
+                  </select>
+                </div>
+                <div>
+                  <p><input type="radio" name="condition" value="1" id="condition-group"><label for="condition-group" class="radio-label">グループ数で分ける</label></p>
+                  <select id="select-condition-group" disabled>
+                    <option value="2" selected>2つ</option>
+                    <option value="3">3つ</option>
+                    <option value="4">4つ</option>
+                    <option value="5">5つ</option>
+                    <option value="6">6つ</option>
+                    <option value="7">7つ</option>
+                    <option value="8">8つ</option>
+                    <option value="9">9つ</option>
+                    <option value="10">10つ</option>
+                  </select>
+                </div>
+              </div>
+            </section>
+          </div>
+        </div>
+      </div><!-- /row -->
+      <div class="tile">
+        <section>
+          <h2><span class="label">STEP 3</span>グループ分け開始</h2>
+          <p>実行ボタンを押すとシャッフルされたメンバーのグループ一覧が作成されます。サーバにデータは残りません。</p>
+          <button type="button" name="button" id="exec-button" class="btn btn-block btn-lg btn-primary">実行する</button>
+        </section>
+      </div>
+      <div class="result" id="result"></div>
+    </div>
+  </main>
+  <footer>
+    <div class="container">
+      <p class="text-right">ご要望やお問い合わせがあればtsubonet@gmail.comまで</p>
+    </div>
+  </footer>
 </body>
 </html>
