@@ -1,20 +1,76 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{title}}!
-  </h1>
-  <img width="300" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4NCjwhLS0gR2VuZXJhdG9yOiBBZG9iZSBJbGx1c3RyYXRvciAxOS4xLjAsIFNWRyBFeHBvcnQgUGx1Zy1JbiAuIFNWRyBWZXJzaW9uOiA2LjAwIEJ1aWxkIDApICAtLT4NCjxzdmcgdmVyc2lvbj0iMS4xIiBpZD0iTGF5ZXJfMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgeD0iMHB4IiB5PSIwcHgiDQoJIHZpZXdCb3g9IjAgMCAyNTAgMjUwIiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCAyNTAgMjUwOyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+DQo8c3R5bGUgdHlwZT0idGV4dC9jc3MiPg0KCS5zdDB7ZmlsbDojREQwMDMxO30NCgkuc3Qxe2ZpbGw6I0MzMDAyRjt9DQoJLnN0MntmaWxsOiNGRkZGRkY7fQ0KPC9zdHlsZT4NCjxnPg0KCTxwb2x5Z29uIGNsYXNzPSJzdDAiIHBvaW50cz0iMTI1LDMwIDEyNSwzMCAxMjUsMzAgMzEuOSw2My4yIDQ2LjEsMTg2LjMgMTI1LDIzMCAxMjUsMjMwIDEyNSwyMzAgMjAzLjksMTg2LjMgMjE4LjEsNjMuMiAJIi8+DQoJPHBvbHlnb24gY2xhc3M9InN0MSIgcG9pbnRzPSIxMjUsMzAgMTI1LDUyLjIgMTI1LDUyLjEgMTI1LDE1My40IDEyNSwxNTMuNCAxMjUsMjMwIDEyNSwyMzAgMjAzLjksMTg2LjMgMjE4LjEsNjMuMiAxMjUsMzAgCSIvPg0KCTxwYXRoIGNsYXNzPSJzdDIiIGQ9Ik0xMjUsNTIuMUw2Ni44LDE4Mi42aDBoMjEuN2gwbDExLjctMjkuMmg0OS40bDExLjcsMjkuMmgwaDIxLjdoMEwxMjUsNTIuMUwxMjUsNTIuMUwxMjUsNTIuMUwxMjUsNTIuMQ0KCQlMMTI1LDUyLjF6IE0xNDIsMTM1LjRIMTA4bDE3LTQwLjlMMTQyLDEzNS40eiIvPg0KPC9nPg0KPC9zdmc+DQo=">
-</div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" href="https://github.com/angular/angular-cli/wiki">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" href="https://blog.angular.io//">Angular blog</a></h2>
-  </li>
-</ul>
-
+<header>
+  <div class="container">
+    <h1 class="text-center"><img src="./assets/img/icons/svg/clipboard.svg" alt="Clipboard"><br>グループ分けツール</h1>
+    <p class="text-lead">シャッフルランチやレクリエーションなどランダムなメンバーのグループ分け(チーム分け)にご活用ください！</p>
+  </div>
+</header>
+<main>
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12 col-sm-6">
+        <div class="tile">
+          <section>
+            <h2><span class="label">STEP 1</span>メンバーを入力する</h2>
+            <p>メンバーの区切りは改行で判断されます。</p>
+            <p>グループの代表者をあらかじめ設定したい場合は、名前の後ろに☆をつけてください。代表者同士が重ならないように振り分けます。</p>
+            <p>例:<br>
+              山田太郎<br>
+              鈴木花子☆<br>
+              佐藤次郎</p>
+            <textarea id="input-persons" placeholder="ここに入力してください&#13;&#10;山田太郎&#13;&#10;鈴木花子☆&#13;&#10;佐藤次郎"></textarea>
+          </section>
+        </div>
+      </div>
+      <div class="col-xs-12 col-sm-6">
+        <div class="tile">
+          <section>
+            <h2><span class="label">STEP 2</span>グループ分けの条件を選ぶ</h2>
+            <div class="radio-wrap">
+              <div>
+                <p><input type="radio" name="condition" value="0" id="condition-persons" checked><label for="condition-persons" class="radio-label">１グループあたりの人数(+余りは分配)で分ける</label></p>
+                <select id="select-condition-persons">
+                  <option value="2">2人</option>
+                  <option value="3">3人</option>
+                  <option value="4" selected>4人</option>
+                  <option value="5">5人</option>
+                  <option value="6">6人</option>
+                  <option value="7">7人</option>
+                  <option value="8">8人</option>
+                  <option value="9">9人</option>
+                  <option value="10">10人</option>
+                </select>
+              </div>
+              <div>
+                <p><input type="radio" name="condition" value="1" id="condition-group"><label for="condition-group" class="radio-label">グループ数で分ける</label></p>
+                <select id="select-condition-group" disabled>
+                  <option value="2" selected>2つ</option>
+                  <option value="3">3つ</option>
+                  <option value="4">4つ</option>
+                  <option value="5">5つ</option>
+                  <option value="6">6つ</option>
+                  <option value="7">7つ</option>
+                  <option value="8">8つ</option>
+                  <option value="9">9つ</option>
+                  <option value="10">10つ</option>
+                </select>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </div><!-- /row -->
+    <div class="tile">
+      <section>
+        <h2><span class="label">STEP 3</span>グループ分け開始</h2>
+        <p>実行ボタンを押すとシャッフルされたメンバーのグループ一覧が作成されます。サーバにデータは残りません。</p>
+        <button type="button" name="button" id="exec-button" class="btn btn-block btn-lg btn-primary">実行する</button>
+      </section>
+    </div>
+    <div class="result" id="result"></div>
+  </div>
+</main>
+<footer>
+  <div class="container">
+    <p class="text-right">ご要望やお問い合わせがあればtsubonet@gmail.comまで</p>
+  </div>
+</footer>
