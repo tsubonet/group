@@ -27,8 +27,8 @@
             <h2><span class="label">STEP 2</span>グループ分けの条件を選ぶ</h2>
             <div class="radio-wrap">
               <div>
-                <p><input type="radio" name="condition" value="0" id="condition-persons" checked><label for="condition-persons" class="radio-label">１グループあたりの人数(+余りは分配)で分ける</label></p>
-                <select id="select-condition-persons">
+                <p><input type="radio" [(ngModel)]="condition" value="persons" id="condition-persons" checked><label for="condition-persons" class="radio-label">１グループあたりの人数(+余りは分配)で分ける</label></p>
+                <select id="select-condition-persons" [disabled]="condition === 'group'">
                   <option value="2">2人</option>
                   <option value="3">3人</option>
                   <option value="4" selected>4人</option>
@@ -41,8 +41,8 @@
                 </select>
               </div>
               <div>
-                <p><input type="radio" name="condition" value="1" id="condition-group"><label for="condition-group" class="radio-label">グループ数で分ける</label></p>
-                <select id="select-condition-group" disabled>
+                <p><input type="radio" [(ngModel)]="condition" value="group" id="condition-group"><label for="condition-group" class="radio-label">グループ数で分ける</label></p>
+                <select id="select-condition-group" [disabled]="condition === 'persons'">
                   <option value="2" selected>2つ</option>
                   <option value="3">3つ</option>
                   <option value="4">4つ</option>
