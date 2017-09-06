@@ -17,7 +17,7 @@
               山田太郎<br>
               鈴木花子☆<br>
               佐藤次郎</p>
-            <textarea id="input-persons" placeholder="ここに入力してください&#13;&#10;山田太郎&#13;&#10;鈴木花子☆&#13;&#10;佐藤次郎"></textarea>
+            <textarea [(ngModel)]="inputPersons" placeholder="ここに入力してください&#13;&#10;山田太郎&#13;&#10;鈴木花子☆&#13;&#10;佐藤次郎"></textarea>
           </section>
         </div>
       </div>
@@ -27,11 +27,11 @@
             <h2><span class="label">STEP 2</span>グループ分けの条件を選ぶ</h2>
             <div class="radio-wrap">
               <div>
-                <p><input type="radio" [(ngModel)]="condition" value="persons" id="condition-persons" checked><label for="condition-persons" class="radio-label">１グループあたりの人数(+余りは分配)で分ける</label></p>
-                <select id="select-condition-persons" [disabled]="condition === 'group'">
+                <p><input type="radio" [(ngModel)]="condition" value="persons" id="condition-persons" [checked]="condition === 'persons'"><label for="condition-persons" class="radio-label">１グループあたりの人数(+余りは分配)で分ける</label></p>
+                <select [(ngModel)]="selectPersons" [disabled]="condition === 'group'">
                   <option value="2">2人</option>
                   <option value="3">3人</option>
-                  <option value="4" selected>4人</option>
+                  <option value="4">4人</option>
                   <option value="5">5人</option>
                   <option value="6">6人</option>
                   <option value="7">7人</option>
@@ -41,9 +41,9 @@
                 </select>
               </div>
               <div>
-                <p><input type="radio" [(ngModel)]="condition" value="group" id="condition-group"><label for="condition-group" class="radio-label">グループ数で分ける</label></p>
-                <select id="select-condition-group" [disabled]="condition === 'persons'">
-                  <option value="2" selected>2つ</option>
+                <p><input type="radio" [(ngModel)]="condition" value="group" id="condition-group" [checked]="condition === 'group'"><label for="condition-group" class="radio-label">グループ数で分ける</label></p>
+                <select [(ngModel)]="selectGroup" [disabled]="condition === 'persons'">
+                  <option value="2">2つ</option>
                   <option value="3">3つ</option>
                   <option value="4">4つ</option>
                   <option value="5">5つ</option>
@@ -63,10 +63,23 @@
       <section>
         <h2><span class="label">STEP 3</span>グループ分け開始</h2>
         <p>実行ボタンを押すとシャッフルされたメンバーのグループ一覧が作成されます。サーバにデータは残りません。</p>
-        <button type="button" name="button" id="exec-button" class="btn btn-block btn-lg btn-primary">実行する</button>
+        <button type="button" class="btn btn-block btn-lg btn-primary" (click)="onExecute()">実行する</button>
       </section>
     </div>
-    <div class="result" id="result"></div>
+    <div class="result" id="result" *ngIf="resultGroup.length">
+      <table class="table table-striped" *ngFor="let group of resultGroup; let i = index">
+        <thead>
+          <tr>
+            <th>グループ{{i + 1}}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let person of group">
+            <td>{{ person }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 </main>
 <footer>

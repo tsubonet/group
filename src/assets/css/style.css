@@ -73,9 +73,10 @@ header h1 img {
 .radio-wrap > * {
   margin: 20px 0;
 }
-.btn-primary {
-  background: #1abc9c;
-  border: #1abc9c;
+.btn-primary,
+.btn-primary:focus {
+  background: #1abc9c !important;
+  border: #1abc9c !important;
 }
 .btn-primary:hover {
   background: #1abc9c;
