@@ -17,7 +17,12 @@
               山田太郎<br>
               鈴木花子☆<br>
               佐藤次郎</p>
-            <textarea [(ngModel)]="inputPersons" placeholder="ここに入力してください&#13;&#10;山田太郎&#13;&#10;鈴木花子☆&#13;&#10;佐藤次郎"></textarea>
+            <textarea [(ngModel)]="inputPersons" placeholder="ここに入力してください&#13;&#10;山田太郎&#13;&#10;鈴木花子☆&#13;&#10;佐藤次郎" #name="ngModel"></textarea>
+            <div *ngIf="name.invalid" class="alert alert-danger">
+            <div *ngIf="name.errors.required">
+              Name is required.
+            </div>
+          </div>
           </section>
         </div>
       </div>
@@ -63,22 +68,24 @@
       <section>
         <h2><span class="label">STEP 3</span>グループ分け開始</h2>
         <p>実行ボタンを押すとシャッフルされたメンバーのグループ一覧が作成されます。サーバにデータは残りません。</p>
-        <button type="button" class="btn btn-block btn-lg btn-primary" (click)="onExecute()">実行する</button>
+        <button type="button" class="btn btn-block btn-lg btn-primary" (click)="onExecute()" [disabled]="!inputPersons">実行する</button>
       </section>
     </div>
-    <div class="result" id="result" *ngIf="resultGroup.length">
-      <table class="table table-striped" *ngFor="let group of resultGroup; let i = index">
-        <thead>
-          <tr>
-            <th>グループ{{i + 1}}</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let person of group">
-            <td>{{ person }}</td>
-          </tr>
-        </tbody>
-      </table>
+    <div id="result-area">
+      <div class="result" id="result" *ngIf="resultGroup.length">
+        <table class="table table-striped" *ngFor="let group of resultGroup; let i = index">
+          <thead>
+            <tr>
+              <th>グループ{{i + 1}}</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let person of group">
+              <td>{{ person }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 </main>

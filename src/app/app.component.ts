@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -7,56 +7,56 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
 
-  private _el: HTMLElement;
+  inputPersons: string    = '';
+  resultGroup: string[][] = [];
+  condition: string       = 'persons';
+  selectPersons: number   = 4;
+  selectGroup: number     = 2;
+  resultOffset: number    = 0;
 
-// constructor(nativeElement: any) {
-//     this._el = nativeElement;
-//     console.log(this._el);
-// }
+  constructor (private _elementRef : ElementRef) {
+  }
 
-  inputPersons: string = '';
-  resultGroup = [];
-
-  condition: string = 'persons';
-  selectPersons: number = 4;
-  selectGroup: number = 2;
+  ngOnInit(): void {
+     this.resultOffset = this._elementRef.nativeElement.querySelector('#result-area').offsetTop;
+  }
 
   onExecute(): void {
+    let inputArray: string[]    = this.inputPersons.split(/\r\n|\r|\n/);
+    let filteredArray: string[] = this.filterProcess(inputArray);
+    let groupNum: number        = 0;
+    let resultArray: string[][] = [];
 
-    let inputArray = this.inputPersons.split(/\r\n|\r|\n/);
+    const groupConstraint: number = (this.condition === 'persons')
+          ? Math.floor(filteredArray.length / this.selectPersons)
+          : this.selectGroup;
 
-    inputArray = inputArray.filter((e) => {
+    for(var i = 0; i < filteredArray.length; i++) {
+      if ( !resultArray[groupNum] ) resultArray[groupNum] = [];
+      resultArray[groupNum].push(filteredArray[i]);
+      groupNum++;
+      if ( groupNum >= groupConstraint ) groupNum = 0;
+    }
+    this.resultGroup = resultArray;
+    this.scrollBy(this.resultOffset, 300);
+  }
+
+  filterProcess(array): string[] {
+
+    let processArray = array.filter((e) => {
       return e !== "";
     });
 
-    if (!inputArray.length) {
-      alert("メンバーを入力してください");
-      return;
-    }
+    this.shuffle(processArray);
 
-    this.shuffle(inputArray);
-
-    inputArray.forEach((value, i) => {
+    processArray.forEach((value, i) => {
       if (value.indexOf('☆') !== -1) {
-        inputArray.splice(i, 1);
-        inputArray.unshift(value);
+        processArray.splice(i, 1);
+        processArray.unshift(value);
       }
     });
 
-    const group = (this.condition === 'persons')
-          ? Math.floor(inputArray.length / this.selectPersons)
-          : this.selectGroup;
-    let num = 0;
-    let newArr = [];
-
-    for(var i = 0; i < inputArray.length; i++) {
-      if ( !newArr[num] ) newArr[num] = [];
-      newArr[num].push(inputArray[i]);
-      num++;
-      if ( num >= group ) num = 0;
-    }
-    this.resultGroup = newArr;
-    this.scrollBy(200, 300);
+    return processArray;
   }
 
   shuffle(array): string[] {
@@ -79,12 +79,13 @@ export class AppComponent {
     const startTime = performance.now();
 
     function step() {
-        var normalizedTime = (performance.now() - startTime) / duration;
-        if (normalizedTime > 1) normalizedTime = 1;
+      let normalizedTime = (performance.now() - startTime) / duration;
+      if (normalizedTime > 1) normalizedTime = 1;
 
-        window.scrollTo(0, baseY + difference * Math.cos(normalizedTime * Math.PI));
-        if (normalizedTime < 1) window.requestAnimationFrame(step);
+      window.scrollTo(0, baseY + difference * Math.cos(normalizedTime * Math.PI));
+      if (normalizedTime < 1) window.requestAnimationFrame(step);
     }
     window.requestAnimationFrame(step);
   }
+
 }
