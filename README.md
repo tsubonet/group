@@ -1,28 +1,48 @@
-# GroupAngularApp
+# web auction frontend customer
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.3.2.
+## Development
 
-## Development server
+### Setup
+Pleas use node version = `14.13.0`
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+```shell
+$ npm install
+```
 
-## Code scaffolding
+### Run development server
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+```
+$ npm run dev
+```
 
-## Build
+### Build and run server
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
+```
+$ npm run build
+$ npm run start
+```
 
-## Running unit tests
+## Deployment
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+### Development
 
-## Running end-to-end tests
+Domain: https://development.timeless-auction.jp
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-Before running the tests make sure you are serving the app via `ng serve`.
+All changes to `main` branch will automatically be deployed to `shared-development` environment ( https://development.timeless-auction.jp ).
+All tags with its name matches `deploy-development-*` will also be deployed to the environment.
 
-## Further help
+### Staging
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+Domain: https://staging.timeless-auction.jp
+
+(Basic auth = `buysell:8NZRiEJvNGZ99rPs8tGj`)
+
+All changes to `release` branch will automatically be deployed to `staging` environment.
+All tags with its name matches `deploy-staging-*` will also be deployed to the environment.
+
+### Production / ( Production test )
+
+Domain: https://timeless-auction.jp ( https://production-test.timeless-auction.jp )
+
+All changes to `release` branch will automatically be deployed to `production` (and `production-test`) environment ( https://timeless-auction.jp https://production-test.timeless-auction.jp ).
+All tags with its name matches `deploy-production-*` will also be deployed to the environment.
